@@ -1,0 +1,49 @@
+[package]
+name = "silent-shard-dkls23-ll-protocol"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror = { version = "=1.0.57" }
+tokio = { version = "1.32.0", features = ["macros", "rt-multi-thread", "time", "net"] }
+gadget-common = { git = "https://github.com/webb-tools/gadget" }
+gadget-core = { git = "https://github.com/webb-tools/gadget" }
+protocol-macros = { git = "https://github.com/webb-tools/gadget" }
+async-trait = "0.1.73"
+log = "0.4.20"
+futures = "0.3.30"
+itertools = "0.12.0"
+round-based-21 = { package = "round-based", version = "0.2.1", features = ["derive"]}
+# digest = { workspace = true }
+# sha2 = { workspace = true }
+rand = "0.8.5"
+rand_core = "0.6"
+rand_chacha = "0.3.1"
+dfns-cggmp21 = { package = "cggmp21", git = "https://github.com/dfns/cggmp21" }
+udigest = { version = "0.1", features = ["std", "derive"]}
+k256 = "0.13.2"
+dkls23-ll = { git = "https://github.com/drewstone/silent-shard-dkls23-ll.git", branch = "drew/thiserror-dep" }
+derivation-path = "0.2.0"
+dfns-cggmp21-protocol = { git = "https://github.com/webb-tools/gadget" }
+
+pallet-jobs-rpc-runtime-api = { git = "https://github.com/webb-tools/tangle.git", branch = "main" }
+pallet-jobs = { git = "https://github.com/webb-tools/tangle.git", branch = "main" }
+pallet-dkg = { git = "https://github.com/webb-tools/tangle.git", branch = "main" }
+tangle-primitives = { git = "https://github.com/webb-tools/tangle.git", branch = "main" }
+
+sp-core = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+sp-io = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+sp-api = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+sp-application-crypto = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+
+sc-client-api = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+
+frame-support = { git = "https://github.com/paritytech/polkadot-sdk", branch = "release-polkadot-v1.7.0"  }
+parity-scale-codec = "3.6.5"
+serde = "1.0.188"
+serde_json = "1.0"
+parking_lot = "0.12.1"
+
+[dev-dependencies]
+test-utils = { git = "https://github.com/webb-tools/gadget" }
