@@ -18,29 +18,29 @@ jobs:
             os: ubuntu-20.04
             target: x86_64-unknown-linux-gnu
             bin: protocol
-            name: precious-FreeBSD-x86_64.tar.gz
+            name: protocol-linux-x86_64.tar.gz
             command: build
 
           - release_for: Windows-x86_64
             os: windows-latest
             target: x86_64-pc-windows-msvc
             bin: protocol
-            name: precious-Windows-x86_64.zip
-            command: both
+            name: protocol-Windows-x86_64.zip
+            command: build
 
           - release_for: macOS-x86_64
             os: macOS-latest
             target: x86_64-apple-darwin
             bin: protocol
-            name: precious-Darwin-x86_64.tar.gz
-            command: both
+            name: protocol-Darwin-x86_64.tar.gz
+            command: build
 
           - release_for: macOS-aarch64
             os: macOS-latest
             target: aarch64-apple-darwin
             bin: protocol
-            name: precious-Darwin-aarch64.tar.gz
-            command: both
+            name: protocol-Darwin-aarch64.tar.gz
+            command: build
 
             # more release targets here ...
 
@@ -62,5 +62,13 @@ jobs:
         with:
           command: ${{ matrix.platform.command }}
           target: ${{ matrix.platform.target }}
-          args: "--locked --release"
+          args: "--locked --release --target-dir /"
           strip: true
+      - name: List artifacts (mac or linux)
+        if: ${{ matrix.platform.os == 'ubuntu-20.04' || matrix.platform.os == 'macOS-latest' }}
+        run: ls -la /
+      - name: Publish artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: ${{ matrix.platform.name }}
+          path: /target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
