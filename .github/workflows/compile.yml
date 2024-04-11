@@ -29,7 +29,7 @@ jobs:
             command: build
 
           - release_for: macOS-x86_64
-            os: macOS-latest
+            os: macOS-13
             target: x86_64-apple-darwin
             bin: protocol
             name: protocol-Darwin-x86_64.tar.gz
@@ -52,7 +52,7 @@ jobs:
         if: ${{ matrix.platform.os == 'ubuntu-20.04' }}
         run: sudo apt-get install protobuf-compiler
       - name: Install protobuf (If macOS)
-        if: ${{ matrix.platform.os == 'macOS-latest' }}
+        if: ${{ matrix.platform.os == 'macOS-latest' || matrix.platform.os == 'macOS-13'}}
         run: brew install protobuf
       - name: Install protobuf (If windows)
         if: ${{ matrix.platform.os == 'windows-latest' }}
@@ -65,7 +65,7 @@ jobs:
           args: "--locked --release --target-dir ${{ github.workspace }}/target/${{ matrix.platform.target }}"
           strip: true
       - name: List artifacts (mac or linux)
-        if: ${{ matrix.platform.os == 'ubuntu-20.04' || matrix.platform.os == 'macOS-latest' }}
+        if: ${{ matrix.platform.os == 'ubuntu-20.04' || matrix.platform.os == 'macOS-latest' || matrix.platform.os == 'macOS-13'}}
         run: ls -la ${{ github.workspace }}/target/${{ matrix.platform.target }}
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
