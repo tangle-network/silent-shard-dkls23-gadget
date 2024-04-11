@@ -35,20 +35,8 @@ jobs:
             name: protocol-Darwin-x86_64.tar.gz
             command: build
 
-          - release_for: macOS-aarch64
-            os: macOS-14
-            target: aarch64-apple-darwin
-            bin: protocol
-            name: protocol-Darwin-aarch64.tar.gz
-            command: build
-
-            # more release targets here ...
-
     runs-on: ${{ matrix.platform.os }}
     steps:
-      - name: Skip macOS-aarch64
-        if: ${{ matrix.platform.os == 'macOS-14' }}
-        run: exit 0
       - name: Checkout
         uses: actions/checkout@v3
       - name: Install protobuf (If linux)
