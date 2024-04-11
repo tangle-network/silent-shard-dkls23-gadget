@@ -51,9 +51,9 @@ jobs:
       - name: Install protobuf (If linux)
         if: ${{ matrix.platform.os == 'ubuntu-20.04' }}
         run: sudo apt-get install protobuf-compiler
-      - name: Install protobuf (If macOS)
+      - name: Install protobuf and gmp (If macOS)
         if: ${{ matrix.platform.os == 'macOS-latest' || matrix.platform.os == 'macOS-13'}}
-        run: brew install protobuf
+        run: brew install protobuf gmp
       - name: Install protobuf (If windows)
         if: ${{ matrix.platform.os == 'windows-latest' }}
         run: choco install protoc
