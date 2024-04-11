@@ -1,17 +1,15 @@
 on:
-  push:
-    branches:
-      - master
   pull_request:
-    branches:
-      - master
+    branches: [main]
+  push:
+    branches: [main]
 
 concurrency:
   group: rust-compile-${{ github.head_ref }}
   cancel-in-progress: true
 
 jobs:
-  release:
+  precompiles:
     name: Release - ${{ matrix.platform.release_for }}
     strategy:
       matrix:
