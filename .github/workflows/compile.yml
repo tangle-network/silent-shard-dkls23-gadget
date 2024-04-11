@@ -62,13 +62,13 @@ jobs:
         with:
           command: ${{ matrix.platform.command }}
           target: ${{ matrix.platform.target }}
-          args: "--locked --release --target-dir /"
+          args: "--locked --release --target-dir ${{ github.workspace }}/target/${{ matrix.platform.target }}
           strip: true
       - name: List artifacts (mac or linux)
         if: ${{ matrix.platform.os == 'ubuntu-20.04' || matrix.platform.os == 'macOS-latest' }}
-        run: ls -la /
+        run: ls -la ${{ github.workspace }}/target/${{ matrix.platform.target }}
       - name: Publish artifacts
         uses: actions/upload-artifact@v2
         with:
           name: ${{ matrix.platform.name }}
-          path: /target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
+          path: ${{ github.workspace }}/target/${{ matrix.platform.target }}/release/${{ matrix.platform.bin }}
